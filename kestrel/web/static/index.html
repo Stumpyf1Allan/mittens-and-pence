@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mittens &amp; Pence</title>
+<link rel="stylesheet" href="/styles.css">
+<link rel="icon" type="image/png" href="/favicon.png">
+</head>
+<body>
+
+<div id="app" class="app" hidden>
+  <aside class="rail">
+    <div class="brand">
+      <!-- A sprite sheet rather than an animated image: CSS can start and stop it
+           exactly, so it plays its ten seconds and then rests, instead of looping
+           forever in the corner of the eye. -->
+      <button id="logo" class="mark" type="button" aria-label="Mittens &amp; Pence"
+              title="Mittens. Click to watch again."></button>
+      <div>
+        <div class="brand-name">Mittens &amp; Pence</div>
+        <div class="brand-sub">Budget and Investment App</div>
+      </div>
+    </div>
+
+    <nav id="nav">
+      <button data-view="dashboard" class="on"><span class="ic">◎</span><span class="lbl">Dashboard</span></button>
+      <button data-view="investments"><span class="ic">▲</span><span class="lbl">Investments</span></button>
+      <button data-view="budget"><span class="ic">◑</span><span class="lbl">Budget</span></button>
+      <button data-view="import"><span class="ic">⤓</span><span class="lbl">Import a file</span></button>
+      <button data-view="export"><span class="ic">⤒</span><span class="lbl">Export a Spreadsheet</span></button>
+      <button data-view="settings"><span class="ic">⚙</span><span class="lbl">Settings</span></button>
+    </nav>
+
+    <div class="rail-foot">
+      <button id="help" type="button"
+              title="Something wrong, or an idea? Email Allan.">
+        <img src="/help.webp" alt="" width="40" height="40">
+        <span class="help-label">Help</span>
+      </button>
+      <button id="btn-sync" class="btn btn-primary wide">Sync everything</button>
+      <div id="sync-note" class="tiny muted"></div>
+      <div class="credit">© Allan Clark</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div id="update-bar" class="updatebar" hidden></div>
+    <div id="reminder-bar" class="updatebar is-quiet" hidden></div>
+    <header class="topbar">
+      <div>
+        <h1 id="view-title">Dashboard</h1>
+        <p id="view-sub" class="muted"></p>
+      </div>
+      <div class="topbar-actions">
+        <button id="btn-privacy" class="btn btn-ghost" title="Hide the numbers">Hide amounts</button>
+        <button id="btn-theme" class="btn btn-ghost" title="Light or dark">◐</button>
+      </div>
+    </header>
+    <div id="view" class="view"></div>
+  </main>
+</div>
+
+<div id="boot" class="boot">
+  <div class="boot-inner">
+    <div class="spinner"></div>
+    <p>Starting Mittens &amp; Pence…</p>
+  </div>
+</div>
+
+<div id="modal" class="modal" hidden>
+  <div class="modal-card" role="dialog" aria-modal="true">
+    <header><h2 id="modal-title"></h2>
+      <button id="modal-close" class="btn btn-ghost" aria-label="Close">✕</button></header>
+    <div id="modal-body"></div>
+    <footer id="modal-foot"></footer>
+  </div>
+</div>
+
+<div id="toasts" class="toasts"></div>
+
+<script src="/app.js"></script>
+</body>
+</html>

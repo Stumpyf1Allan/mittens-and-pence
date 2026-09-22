@@ -1,0 +1,697 @@
+/* Mittens & Pence — a calm, dense interface for money.
+   No web fonts, no CDN: the app must work with the internet off. */
+
+:root {
+  --bg: #f6f7fa;
+  --panel: #ffffff;
+  --panel-2: #fbfcfe;
+  --ink: #14202e;
+  --ink-2: #47576b;
+  --muted: #7a8798;
+  --line: #e3e8ef;
+  --line-2: #eef1f6;
+  --accent: #2352c9;
+  --accent-soft: #e8eefc;
+  --up: #0b7a55;
+  --up-soft: #e3f5ee;
+  --down: #b3261e;
+  --down-soft: #fdeceb;
+  --warn: #a55b00;
+  --warn-soft: #fdf1df;
+  --shadow: 0 1px 2px rgba(20,32,46,.06), 0 8px 24px rgba(20,32,46,.06);
+  --radius: 12px;
+  --mono: ui-monospace, "SF Mono", "Cascadia Mono", Menlo, Consolas, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  /* The dropdown arrow, inline so it needs no network and no icon font. */
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%237a8798' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+html[data-theme="dark"] {
+  --bg: #0e141b;
+  --panel: #151d26;
+  --panel-2: #1a232e;
+  --ink: #e7edf4;
+  --ink-2: #a9b8c9;
+  --muted: #7d8b9c;
+  --line: #24303d;
+  --line-2: #1d2733;
+  --accent: #6f9bff;
+  --accent-soft: #1b2942;
+  --up: #46c295;
+  --up-soft: #12312a;
+  --down: #ef7a72;
+  --down-soft: #331b1b;
+  --warn: #e0a458;
+  --warn-soft: #33270f;
+  --shadow: 0 1px 2px rgba(0,0,0,.4), 0 10px 30px rgba(0,0,0,.3);
+  --chevron: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238fa0b3' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+* { box-sizing: border-box; }
+/* `display:grid` on .modal/.app would otherwise beat the [hidden] attribute and leave
+   an invisible overlay swallowing every click. */
+[hidden] { display: none !important; }
+html, body { height: 100%; }
+body {
+  margin: 0; font-family: var(--sans); font-size: 14px; line-height: 1.5;
+  color: var(--ink); background: var(--bg); -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, h4 { margin: 0; font-weight: 650; letter-spacing: -.01em; }
+h1 { font-size: 1.75rem; }
+h2 { font-size: 1.18rem; }
+h3 { font-size: 1.02rem; }
+p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+a { color: var(--accent); }
+
+.muted { color: var(--muted); }
+.tiny { font-size: .78rem; }
+.small { font-size: .85rem; }
+.num { font-variant-numeric: tabular-nums; }
+.up { color: var(--up); }
+.down { color: var(--down); }
+.right { text-align: right; }
+.center { text-align: center; }
+.nowrap { white-space: nowrap; }
+.stack { display: grid; gap: 14px; }
+.row { display: flex; gap: 10px; align-items: center; }
+.row.wrap { flex-wrap: wrap; }
+.spread { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+.grow { flex: 1; }
+.hidden { display: none !important; }
+.blur { filter: blur(6px); user-select: none; }
+
+/* ---------------------------------------------------------------- shell */
+/* The rail is wider than it needs to be for the nav, because the brand block sits in
+   it and is meant to be the first thing you see.
+
+   ONE NUMBER drives the whole brand block. The rail is a proportion of the window,
+   clamped so it never gets silly on a phone-narrow window or a 4K monitor, and the
+   logo, the name and the subtitle are all `calc()`ed from it. That way the brand keeps
+   the same proportions against the main area at every screen size, instead of a fixed
+   62px cat that looks lost on a big monitor and crowds a small one. */
+:root { --rail: clamp(216px, 16.5vw, 280px); }
+
+.app { display: grid; grid-template-columns: var(--rail) 1fr; min-height: 100vh; }
+
+.rail {
+  background: var(--panel); border-right: 1px solid var(--line);
+  display: flex; flex-direction: column; padding: 18px 12px; gap: 18px;
+  position: sticky; top: 0; height: 100vh;
+}
+/* Stacked, not side by side. The name is fifteen characters and wants to be read at a
+   glance; beside a logo big enough to be worth looking at there is no width left for it
+   in a sidebar, which is what drove the earlier version out over the main window. Given
+   the full width of the rail it fits on one line at every size, and nothing overhangs
+   anything. */
+.brand {
+  display: grid; justify-items: center; text-align: center;
+  gap: calc(var(--rail) * .026);
+  padding-bottom: calc(var(--rail) * .055);
+  border-bottom: 1px solid var(--line-2);
+}
+/* The logo is a 12x10 sprite sheet of 120 frames — one image, one decode, and CSS
+   drives it frame by frame. An animated WebP would loop forever with no way to stop it;
+   stepping a sprite means the animation runs when we say and rests on frame 0. Two
+   keyframes because the sheet has rows: X steps across a row once per second, Y steps
+   down a row each time X wraps.
+
+   The frame is 139x96, not square. The picture is a cat on a spread-out pile of money,
+   about 1.44:1, and squaring it spent two fifths of every frame on empty space above
+   and below — which meant the sheet had to be rendered small and then scaled UP here to
+   make the cat a sensible size, and an upscaled sprite looks soft. A frame shaped like
+   the picture is sharper and smaller at once. Hence two variables rather than one. */
+.mark {
+  /* Proportional to the rail, but also capped against the window's *height*, so a short
+     laptop window doesn't get a cat taking up a third of the sidebar. */
+  --fh: min(calc(var(--rail) * .38), 11vh);
+  --fw: calc(var(--fh) * 139 / 96);
+  --cols: 12;
+  --rows: 10;
+  --play: 10s;               /* 120 frames at 12fps */
+  width: var(--fw); height: var(--fh); flex: none;
+  padding: 0; border: 0; background-color: transparent; cursor: pointer;
+  background-image: url("/logo.webp");
+  background-repeat: no-repeat;
+  background-size: calc(var(--fw) * var(--cols)) calc(var(--fh) * var(--rows));
+  background-position: 0 0;
+  image-rendering: auto;
+  /* The sheet is rebuilt from the source video with the whole picture inside every
+     frame and a small transparent margin, so nothing is sliced at the edge any more.
+     The fade now falls entirely within that margin — it takes nothing off the money
+     pile, and it is still there if the artwork is ever re-cut closer to the edge. */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 3%, #000 97%, transparent 100%);
+}
+.mark.playing {
+  animation:
+    sprite-x calc(var(--play) / var(--rows)) steps(var(--cols)) var(--rows),
+    sprite-y var(--play) steps(var(--rows)) 1;
+}
+@keyframes sprite-x {
+  from { background-position-x: 0; }
+  to   { background-position-x: calc(var(--fw) * var(--cols) * -1); }
+}
+@keyframes sprite-y {
+  from { background-position-y: 0; }
+  to   { background-position-y: calc(var(--fh) * var(--rows) * -1); }
+}
+/* Someone who has asked for less movement gets the cat sitting still. */
+@media (prefers-reduced-motion: reduce) {
+  .mark.playing { animation: none; }
+}
+.brand-name {
+  font-weight: 760; letter-spacing: -.025em;
+  font-size: calc(var(--rail) * .088);
+  line-height: 1.12; white-space: nowrap;
+}
+/* One line under the name. It wrapped to two at a fixed .72rem, which read as a mistake
+   rather than a subtitle; sized from the rail it stays one line at every width, with
+   ellipsis as the last resort rather than the usual case. */
+.brand-sub {
+  font-size: calc(var(--rail) * .047); color: var(--muted); line-height: 1.3;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;
+}
+
+#nav { display: grid; gap: 2px; }
+#nav button {
+  display: flex; align-items: center; gap: 10px; width: 100%; text-align: left;
+  background: none; border: 0; padding: 8px 10px; border-radius: 8px;
+  color: var(--ink-2); cursor: pointer; font-size: .9rem;
+}
+#nav button:hover { background: var(--panel-2); color: var(--ink); }
+#nav button.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+#nav .ic { width: 16px; text-align: center; opacity: .8; font-size: .9rem; }
+
+.rail-foot { margin-top: auto; display: grid; gap: 8px; }
+
+.main { min-width: 0; display: flex; flex-direction: column; }
+.topbar {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+  padding: 22px 26px 14px;
+}
+.topbar h1 { line-height: 1.2; }
+.topbar #view-sub { margin-top: 3px; }
+.topbar-actions { display: flex; gap: 6px; }
+.view { padding: 6px 26px 60px; }
+
+/* ------------------------------------------------------- "Needs a look" rows
+   Each one is a button, because each one goes somewhere. */
+.alert {
+  display: flex; gap: 8px; align-items: flex-start; width: 100%; text-align: left;
+  background: none; border: 0; border-radius: 8px; padding: 7px 8px; margin: 0 -8px;
+  cursor: pointer; font: inherit; color: inherit;
+}
+.alert:hover { background: var(--panel-2); }
+.alert:hover .go { color: var(--accent); }
+.alert .go { white-space: nowrap; color: var(--muted); padding-top: 2px; }
+.alert .grow { min-width: 0; }
+
+/* ------------------------------------------------------------ update bar
+   Sits above the heading rather than floating over the screen: a new version is
+   worth knowing about, not worth covering a number up for. */
+.updatebar {
+  display: flex; align-items: center; gap: 12px; flex-wrap: wrap;
+  margin: 12px 26px 0; padding: 10px 14px;
+  border: 1px solid var(--accent); border-radius: 10px;
+  background: var(--accent-soft); color: var(--ink);
+  font-size: .89rem;
+}
+.updatebar.is-quiet { border-color: var(--line); background: var(--panel-2); }
+.updatebar .ub-text { flex: 1 1 240px; min-width: 0; }
+.updatebar b { font-weight: 650; }
+.updatebar .ub-note { display: block; color: var(--ink-2); font-size: .82rem; margin-top: 2px; }
+.updatebar .ub-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+.updatebar .ub-x {
+  border: 0; background: none; cursor: pointer; color: var(--muted);
+  font-size: 1rem; line-height: 1; padding: 4px 6px; border-radius: 6px;
+}
+.updatebar .ub-x:hover { background: var(--panel); color: var(--ink); }
+.bar {
+  flex: 1 1 160px; height: 6px; border-radius: 99px; overflow: hidden;
+  background: var(--line); min-width: 120px;
+}
+.bar > i { display: block; height: 100%; background: var(--accent); transition: width .3s; }
+
+/* ---------------------------------------------------------------- bits */
+.btn {
+  border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+  padding: 7px 13px; border-radius: 8px; cursor: pointer; font-size: .87rem;
+  transition: background .12s, border-color .12s; white-space: nowrap;
+}
+.btn:hover { background: var(--panel-2); border-color: var(--muted); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+.btn-primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+.btn-primary:hover { filter: brightness(1.08); background: var(--accent); }
+.btn-ghost { border-color: transparent; background: transparent; color: var(--ink-2); }
+.btn-ghost:hover { background: var(--panel-2); }
+.btn-danger { color: var(--down); border-color: var(--line); }
+.btn-danger:hover { background: var(--down-soft); border-color: var(--down); }
+.btn-sm { padding: 4px 9px; font-size: .8rem; }
+.wide { width: 100%; }
+
+/* `month` was missing here, so the period filter on Transactions rendered as a raw
+   browser control next to styled ones and looked broken. List the lot. */
+/* `input:not([type])` matters: a bare <input> matched none of the rules below and came
+   out with browser defaults sitting beside properly styled fields. */
+input:not([type]),
+input[type=text], input[type=number], input[type=date], input[type=search],
+input[type=password], input[type=month], input[type=week], input[type=time],
+input[type=datetime-local], input[type=email], input[type=url], input[type=tel],
+select, textarea {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--panel); color: var(--ink);
+}
+input:focus, select:focus, textarea:focus {
+  outline: 2px solid var(--accent-soft); border-color: var(--accent);
+}
+/* Every dropdown in the app used to be pixel-identical to a text box, so there was
+   nothing to say you could click it. One chevron, drawn inline so it works offline. */
+select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  padding-right: 32px;
+  background-image: var(--chevron);
+  background-repeat: no-repeat; background-position: right 11px center;
+  background-size: 11px;
+}
+select:hover { border-color: var(--accent); }
+select[multiple], select[size] { background-image: none; padding-right: 10px; }
+label.field { display: grid; gap: 5px; font-size: .82rem; color: var(--ink-2); }
+label.field .hint, .field .hint { font-size: .76rem; color: var(--muted); font-weight: 400; }
+.field .hint { font-style: normal; }
+
+.card {
+  background: var(--panel); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: 16px; box-shadow: var(--shadow);
+}
+.card > h2, .card > h3 { margin-bottom: 4px; }
+.card-flat { box-shadow: none; }
+.grid { display: grid; gap: 14px; }
+.g2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+.g3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+.g4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+@media (max-width: 1180px) { .g4 { grid-template-columns: repeat(2, minmax(0,1fr)); } }
+@media (max-width: 900px) {
+  .g3, .g2 { grid-template-columns: 1fr; }
+  /* Redefining --rail rather than the grid keeps the logo in proportion with the
+     collapsed rail instead of leaving a 110px cat in a 68px column. */
+  :root { --rail: 68px; }
+  .brand { border-bottom: 0; padding-bottom: 0; }
+  .mark { --fh: 34px; }
+  /* `span:last-child` matched the icon, because the label was a bare text node — so
+     this hid the icons and kept the labels, which then spilled out of a 68px rail. */
+  .brand-name, .brand-sub, #nav .lbl { display: none; }
+  #nav button { justify-content: center; padding: 10px 0; }
+  #nav .ic { font-size: 1.05rem; }
+  .rail { padding: 14px 8px; }
+  .rail-foot .btn { font-size: 0; padding: 10px 0; }
+  .rail-foot .btn::after { content: '↻'; font-size: 1rem; }
+  #sync-note { display: none; }
+  .credit { font-size: .58rem; line-height: 1.25; }
+}
+
+/* align-content: start, so a tile with no sub-line keeps its figure on the same
+   line as the tiles beside it that do have one. Without it the grid stretches its
+   rows to the tallest tile in the row and the short ones sink to the bottom, which
+   reads as a layout that has come apart. */
+.stat { display: grid; gap: 2px; align-content: start; }
+.stat .k { font-size: .76rem; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
+.stat .v { font-size: 1.6rem; font-weight: 660; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+.stat .s { font-size: .82rem; color: var(--ink-2); }
+
+.pill {
+  display: inline-flex; align-items: center; gap: 5px; padding: 2px 8px;
+  border-radius: 999px; font-size: .74rem; font-weight: 600;
+  background: var(--panel-2); color: var(--ink-2); border: 1px solid var(--line);
+}
+.pill.up { background: var(--up-soft); color: var(--up); border-color: transparent; }
+.pill.down { background: var(--down-soft); color: var(--down); border-color: transparent; }
+.pill.warn { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+.pill.info { background: var(--accent-soft); color: var(--accent); border-color: transparent; }
+
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th {
+  text-align: left; font-size: .72rem; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--muted); font-weight: 600; padding: 8px 10px;
+  border-bottom: 1px solid var(--line); position: sticky; top: 0; background: var(--panel);
+}
+td { padding: 9px 10px; border-bottom: 1px solid var(--line-2); }
+tbody tr:hover td { background: var(--panel-2); }
+.table-wrap { overflow: auto; max-height: 66vh; border-radius: 10px; }
+.sym { font-family: var(--mono); font-size: .84rem; font-weight: 600; }
+
+.bar { height: 7px; border-radius: 4px; background: var(--line-2); overflow: hidden; }
+.bar > i { display: block; height: 100%; border-radius: 4px; background: var(--accent); }
+.bar.over > i { background: var(--down); }
+.bar.close > i { background: var(--warn); }
+.bar.ok > i { background: var(--up); }
+
+.empty { text-align: center; padding: 42px 20px; color: var(--muted); }
+.empty h3 { color: var(--ink); margin-bottom: 6px; }
+
+/* ---------------------------------------------------------------- boot */
+.boot { position: fixed; inset: 0; display: grid; place-items: center; background: var(--bg); z-index: 50; }
+.boot-inner { text-align: center; color: var(--muted); display: grid; gap: 14px; justify-items: center; }
+.spinner {
+  width: 26px; height: 26px; border: 2.5px solid var(--line);
+  border-top-color: var(--accent); border-radius: 50%; animation: spin .7s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ---------------------------------------------------------------- modal */
+.modal { position: fixed; inset: 0; background: rgba(10,16,24,.44); display: grid;
+  place-items: center; z-index: 60; padding: 24px; }
+.modal-card {
+  background: var(--panel); border-radius: 14px; width: min(680px, 100%);
+  max-height: 88vh; display: flex; flex-direction: column; box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+.modal-card > header { display: flex; justify-content: space-between; align-items: center;
+  padding: 16px 18px; border-bottom: 1px solid var(--line); }
+.modal-card > #modal-body { padding: 18px; overflow: auto; }
+.modal-card > footer { padding: 14px 18px; border-top: 1px solid var(--line);
+  display: flex; justify-content: flex-end; gap: 8px; }
+.modal-card > footer:empty { display: none; }
+
+/* ---------------------------------------------------------------- toasts */
+/* Anchored to both edges so a long message wraps inside the viewport instead of
+   running off the right-hand side and being cut in half. */
+.toasts {
+  position: fixed; right: 18px; bottom: 18px; left: auto; display: grid; gap: 8px;
+  z-index: 70; max-width: min(480px, calc(100vw - 36px)); justify-items: end;
+}
+.toast {
+  background: var(--panel); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+  padding: 11px 15px; border-radius: 9px; box-shadow: var(--shadow);
+  max-width: 100%; width: fit-content; animation: rise .18s ease-out;
+  white-space: pre-line; overflow-wrap: anywhere; line-height: 1.45;
+  max-height: 45vh; overflow: auto;
+}
+.toast.err { --toast-life: 14s; }
+.toast.err { border-left-color: var(--down); }
+.toast.ok { border-left-color: var(--up); }
+@keyframes rise { from { opacity: 0; transform: translateY(8px); } }
+
+/* ---------------------------------------------------------------- picker */
+.picker { position: relative; }
+/* In the flow rather than absolutely positioned: an overlay list gets clipped by the
+   modal's own scroll container, which hid half the results. */
+.picker-list {
+  margin-top: 6px; background: var(--panel); border: 1px solid var(--line);
+  border-radius: 10px; max-height: 320px; overflow: auto;
+}
+.picker-note { padding: 8px 12px; font-size: .78rem; color: var(--warn);
+  background: var(--warn-soft); border-bottom: 1px solid var(--line); }
+.picker-item { padding: 9px 12px; cursor: pointer; display: flex; justify-content: space-between;
+  gap: 10px; align-items: center; border-bottom: 1px solid var(--line-2); }
+.picker-item:last-child { border-bottom: 0; }
+.picker-item:hover, .picker-item.on { background: var(--accent-soft); }
+.picker-item .nm { font-weight: 560; }
+.picker-item .meta { font-size: .74rem; color: var(--muted); }
+.picker-group { padding: 6px 12px; font-size: .7rem; text-transform: uppercase;
+  letter-spacing: .05em; color: var(--muted); background: var(--panel-2);
+  position: sticky; top: 0; }
+
+/* ---------------------------------------------------------------- steps */
+.steps { display: grid; gap: 10px; }
+.step {
+  border: 1px solid var(--line); border-radius: 11px; padding: 14px 16px; background: var(--panel);
+  display: grid; gap: 6px;
+}
+.step.best { border-color: var(--accent); background: var(--accent-soft); }
+.step h4 { display: flex; align-items: center; gap: 8px; }
+.step ol { margin: 6px 0 0; padding-left: 20px; color: var(--ink-2); font-size: .86rem; }
+.step ol li { margin: 3px 0; }
+
+.dropzone {
+  border: 2px dashed var(--line); border-radius: 14px; padding: 34px 20px; text-align: center;
+  background: var(--panel-2); cursor: pointer; transition: border-color .15s, background .15s;
+}
+.dropzone.hot { border-color: var(--accent); background: var(--accent-soft); }
+
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; font-size: .87rem; }
+.kv dt { color: var(--muted); }
+.kv dd { margin: 0; font-variant-numeric: tabular-nums; }
+
+.chip-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.chip {
+  border: 1px solid var(--line); background: var(--panel); border-radius: 999px;
+  padding: 4px 11px; font-size: .8rem; cursor: pointer;
+}
+.chip.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 10px 16px; font-size: .8rem; }
+.legend i { width: 9px; height: 9px; border-radius: 2px; display: inline-block; margin-right: 6px; }
+
+svg.chart { width: 100%; display: block; overflow: visible; }
+svg.chart text { font-size: 10px; fill: var(--muted); font-family: var(--sans); }
+
+/* ---------------------------------------------------------- setup dialog */
+/* The provider choice was easy to miss — it reads as a heading now, and the
+   select looks like something you click rather than a flat text field. */
+.chooser {
+  border: 1px solid var(--accent); border-radius: 11px; padding: 12px 14px;
+  background: var(--accent-soft); margin-bottom: 16px;
+}
+.chooser-head {
+  font-size: 1rem; font-weight: 700; color: var(--accent); letter-spacing: -.01em;
+}
+select.select-loud {
+  font-size: .95rem; font-weight: 600; padding: 10px 38px 10px 12px;
+  border: 2px solid var(--accent); background-color: var(--panel);
+  cursor: pointer; appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%232352c9' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 13px center;
+  background-size: 12px;
+}
+html[data-theme="dark"] select.select-loud {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236f9bff' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+select.select-loud:hover { filter: brightness(1.03); }
+
+.steps-list { margin: 10px 0 0; padding-left: 22px; font-size: .88rem; line-height: 1.55; }
+.steps-list > li { margin: 9px 0; padding-left: 2px; }
+.steps-list > li::marker { font-weight: 700; color: var(--accent); }
+
+.copybox { margin: 7px 0 2px; }
+.copybox-label { font-size: .74rem; color: var(--muted); margin-bottom: 3px; }
+.copybox-row {
+  display: flex; align-items: center; gap: 8px; background: var(--panel);
+  border: 1px solid var(--line); border-radius: 8px; padding: 6px 6px 6px 10px;
+}
+.copybox-row code {
+  flex: 1; font-family: var(--mono); font-size: .8rem; color: var(--ink);
+  overflow-x: auto; white-space: nowrap; user-select: all;
+}
+.copybox-row .btn { flex: none; }
+
+.callout {
+  border-radius: 10px; padding: 11px 14px; font-size: .86rem;
+  border: 1px solid var(--line); background: var(--panel-2);
+}
+.callout.warn { background: var(--warn-soft); border-color: var(--warn); color: var(--ink); }
+.callout.warn b { color: var(--warn); }
+.callout p { margin: 0; }
+
+/* ---------------------------------------------------------------- the tour */
+/* Four dark panels around the highlight rather than a clip-path cut-out: it renders
+   identically in every engine, needs no compositing tricks, and each panel is a plain
+   rectangle the browser can animate cheaply. */
+#tour { position: fixed; inset: 0; z-index: 90; }
+.tour-pane {
+  position: fixed; background: rgba(8, 14, 22, .62);
+  transition: top .18s ease, left .18s ease, width .18s ease, height .18s ease;
+}
+html[data-theme="dark"] .tour-pane { background: rgba(0, 0, 0, .68); }
+
+.tour-ring {
+  position: fixed; border-radius: 10px; pointer-events: none;
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent);
+  transition: top .18s ease, left .18s ease, width .18s ease, height .18s ease;
+  animation: tour-pulse 1.9s ease-in-out infinite;
+}
+@keyframes tour-pulse {
+  0%, 100% { box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 28%, transparent); }
+  50%      { box-shadow: 0 0 0 9px color-mix(in srgb, var(--accent) 10%, transparent); }
+}
+/* Someone who has asked for less movement gets the ring without the heartbeat. */
+@media (prefers-reduced-motion: reduce) {
+  .tour-ring { animation: none; }
+  .tour-pane, .tour-ring { transition: none; }
+}
+
+.tour-card {
+  position: fixed; width: min(360px, calc(100vw - 24px));
+  /* A backstop for a short window: the card is repositioned whenever it changes size,
+     but on a laptop with a 560px-tall window there is simply nowhere for a tall card to
+     go, and scrolling the card beats hiding the Next button below the fold. */
+  max-height: calc(100vh - 24px); overflow-y: auto; overscroll-behavior: contain;
+  background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+  padding: 16px 18px 14px; box-shadow: 0 12px 40px rgba(0,0,0,.28);
+  transition: top .18s ease, left .18s ease;
+}
+.tour-step {
+  font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 5px;
+}
+.tour-card h2 { font-size: 1.1rem; margin-bottom: 7px; }
+.tour-body { font-size: .88rem; color: var(--ink-2); line-height: 1.55; }
+.tour-foot { display: flex; align-items: center; gap: 8px; margin-top: 15px; }
+
+
+/* ------------------------------------------------------------- help button */
+/* At the foot of the rail, above Sync everything. It used to float over the
+   bottom-right corner of the window, which looked tidy on a short page and covered a
+   line of somebody's money on every long one — scrolled halfway down the Dashboard it
+   sat squarely on "Less what you owe". A fixed button has no way of knowing what is
+   underneath it, so it lives in the rail instead, where there is nothing to cover.
+   Subtle at rest — it reads as part of the furniture — and steps forward on hover so
+   there is no doubt it is a button. The cat already has a question mark over its head,
+   and the word "Help" removes any remaining ambiguity. */
+#help {
+  width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 4px 10px 4px 4px; border-radius: 999px;
+  background: var(--panel); border: 1px solid var(--line);
+  color: var(--muted); font-size: .84rem; font-weight: 600;
+  cursor: pointer;
+  opacity: .82; transition: opacity .16s, transform .16s, border-color .16s, color .16s;
+}
+#help img { width: 40px; height: 40px; display: block; pointer-events: none; }
+#help:hover, #help:focus-visible {
+  opacity: 1; transform: translateY(-2px);
+  border-color: var(--accent); color: var(--accent);
+}
+#help:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+#help:active { transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) { #help { transition: opacity .16s; }
+  #help:hover { transform: none; } }
+/* On a narrow window the rail collapses to icons; the label goes too, leaving the cat. */
+@media (max-width: 900px) {
+  #help { padding: 3px; gap: 0; }
+  #help .help-label { display: none; }
+  #help img { width: 30px; height: 30px; }
+}
+
+/* --------------------------------------------------------- budget sections */
+.sec-row { border: 1px solid var(--line); border-radius: 10px; margin-bottom: 8px; }
+.sec-head { display: flex; align-items: center; gap: 8px; padding: 9px 12px; }
+.sec-lines { padding: 0 12px 12px 24px; border-top: 1px solid var(--line-2); }
+.sec-line {
+  display: flex; align-items: center; gap: 8px; padding: 5px 0;
+  font-size: .86rem; border-bottom: 1px solid var(--line-2);
+}
+.sec-line:last-of-type { border-bottom: 0; }
+
+/* ------------------------------------------------------------ import queue */
+.qlist { display: grid; gap: 2px; }
+.qrow {
+  display: flex; align-items: center; gap: 9px; padding: 6px 8px;
+  border-radius: 7px; font-size: .87rem;
+}
+.qrow.asking { background: var(--accent-soft); }
+.qrow.failed { background: var(--down-soft); }
+.qdot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); flex: none; }
+.qrow.reading .qdot { background: var(--accent); animation: qpulse 1s ease-in-out infinite; }
+.qrow.asking  .qdot { background: var(--accent); }
+.qrow.done    .qdot { background: var(--up); }
+.qrow.failed  .qdot { background: var(--down); }
+.qname { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 46%; }
+@keyframes qpulse { 0%,100% { opacity: 1 } 50% { opacity: .3 } }
+@media (prefers-reduced-motion: reduce) { .qrow.reading .qdot { animation: none } }
+
+/* ---- importing somebody's own budget spreadsheet ---- */
+/* The preview is editable in place: every figure and every name can be corrected
+   before anything is written, because a guess at somebody's own category names is
+   only ever a starting point. */
+.cell-num, .cell-txt {
+  width: 100%; padding: 4px 6px; font: inherit; font-size: .85rem;
+  background: var(--bg); color: var(--ink);
+  border: 1px solid transparent; border-radius: 6px;
+}
+.cell-num { text-align: right; font-variant-numeric: tabular-nums; }
+.cell-num:hover, .cell-txt:hover { border-color: var(--line); }
+.cell-num:focus, .cell-txt:focus { border-color: var(--accent); outline: none; }
+tbody tr.off { opacity: .42; }
+tbody tr.off .cell-num, tbody tr.off .cell-txt { text-decoration: line-through; }
+td .hint {
+  display: inline-block; margin-left: 6px; padding: 1px 6px; border-radius: 999px;
+  font-size: .68rem; font-weight: 600; letter-spacing: .02em;
+  background: var(--accent-soft, rgba(79,124,255,.16)); color: var(--accent);
+}
+/* A budget preview is a five-column editable table; in half a page every cell clips,
+   which defeats the point of showing it before anything is written. */
+.grid.g2.one-col { grid-template-columns: 1fr; }
+
+/* ---- money out / money in ---- */
+/* Two buttons, not a text box with a minus sign in it. Out and in are what a person
+   actually knows; a stray minus is how an amount gets entered backwards. */
+.seg { display: inline-flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
+.seg-btn {
+  padding: 9px 14px; font: inherit; font-size: .88rem; cursor: pointer;
+  background: var(--card); color: var(--muted); border: 0; border-right: 1px solid var(--line);
+}
+.seg-btn:last-child { border-right: 0; }
+.seg-btn:hover { color: var(--ink); }
+.seg-btn.on { background: var(--accent-soft); color: var(--accent); font-weight: 600; }
+.pill.typed { background: var(--accent-soft); color: var(--accent); }
+/* a non-label field still needs the label-above-control layout */
+.field.field-block { display: grid; gap: 5px; font-size: .82rem; color: var(--ink-2); }
+
+/* ---- mortgages ---- */
+.mort .stat .v { font-size: 1.35rem; }
+.mort-bar {
+  height: 8px; border-radius: 999px; background: var(--line); overflow: hidden;
+}
+.mort-bar-fill {
+  height: 100%; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--up));
+}
+details > summary { cursor: pointer; color: var(--accent); }
+details > summary::marker { color: var(--muted); }
+
+/* ---- who's in the household ---- */
+.swatch {
+  width: 26px; height: 26px; border-radius: 50%; cursor: pointer;
+  border: 2px solid transparent; padding: 0;
+}
+.swatch.on { border-color: var(--ink); box-shadow: 0 0 0 2px var(--panel) inset; }
+.swatch:hover { transform: scale(1.08); }
+.tour-extra input { width: 100%; }
+.pill.split { background: var(--accent-soft); color: var(--accent); }
+
+/* A name that opens the institution's own site. A button, not an <a>, because the
+   native app window would navigate away from the app itself rather than opening a
+   browser — the click goes through /api/open-url instead. */
+.linkish {
+  background: none; border: 0; padding: 0; font: inherit; color: var(--accent);
+  cursor: pointer; text-align: left;
+}
+.linkish:hover { text-decoration: underline; }
+
+/* ---- tabs inside Budget ---- */
+/* Accounts, Transactions, Connections and Budgets were four rail entries; they are one
+   now, because they are all answers to "where is my money". */
+.subtabs {
+  display: flex; gap: 2px; border-bottom: 1px solid var(--line);
+  overflow-x: auto; scrollbar-width: none;
+}
+.subtabs::-webkit-scrollbar { display: none; }
+.subtab {
+  padding: 10px 16px; border: 0; background: none; cursor: pointer;
+  font: inherit; font-size: .92rem; color: var(--muted); white-space: nowrap;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+}
+.subtab:hover { color: var(--ink); }
+.subtab.on { color: var(--accent); border-bottom-color: var(--accent); font-weight: 600; }
+
+/* ---- credit ---- */
+/* Bottom-left, under the sync button: present without competing with anything. Sits in
+   the rail's flow rather than fixed to the viewport, so it can never land on top of a
+   button or a figure. */
+.credit {
+  font-size: .68rem; color: var(--muted); opacity: .55;
+  letter-spacing: .02em; text-align: center; padding-top: 2px;
+  user-select: text;
+}
+.credit:hover { opacity: .85; }

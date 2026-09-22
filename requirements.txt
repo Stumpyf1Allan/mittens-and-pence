@@ -1,0 +1,25 @@
+# Mittens & Pence needs exactly one third-party package to run.
+openpyxl>=3.1
+
+# Needed only to import a statement that arrives as a PDF. Without it every other
+# format still works and the import screen explains what is missing.
+pdfplumber>=0.11
+# Pillow arrives with pdfplumber anyway, but it is load-bearing in its own right
+# (PDF pages, and the app icon), and a transitive dependency that quietly goes
+# away is a mystery nobody wants at build time. Declared on purpose.
+Pillow>=10.0
+
+# Strongly recommended — the app works without them but is better with them:
+#   keyring        stores the encryption key in Windows Credential Manager /
+#                  macOS Keychain instead of a file
+#   cryptography   AES-GCM for the credential vault, and RSA signing for Enable Banking
+#                  (required if you use Enable Banking; optional otherwise)
+#   pywebview      a proper app window instead of a browser tab
+keyring>=24.0; platform_system != "Linux"
+cryptography>=41.0
+pywebview>=4.4
+
+# Only needed if you push the workbooks into Google Sheets automatically
+# (the manual route — drag the .xlsx into Drive — needs nothing).
+# gspread>=6.0
+# google-auth>=2.29

@@ -1,0 +1,315 @@
+# Build Mittens & Pence for Windows and for both kinds of Mac, and put the lot on a
+# GitHub release — including latest.json, which is what every existing copy reads to
+# find out a new version exists.
+#
+# WHY THIS EXISTS
+# PyInstaller cannot cross-compile. A Windows build has to be made on Windows and a
+# Mac build on a Mac, and there is no Mac in the house. GitHub lends out both, free
+# and unlimited, to public repositories — so the machines come to us.
+#
+# HOW TO USE IT
+#   1. Bump APP_VERSION in kestrel/config.py and push.
+#   2. Actions -> Release -> Run workflow -> type the tag, e.g. v1.1.0.
+#      (Or push the tag yourself: git tag v1.1.0 && git push origin v1.1.0)
+#   3. It builds, runs all the tests on every platform, and leaves a DRAFT release.
+#   4. Read the draft, then press Publish release. Nothing reaches anybody until you do.
+#
+# THE DRAFT IS DELIBERATE. /releases/latest/download/latest.json — the address baked
+# into every copy already out there — ignores drafts. So a half-right release sits
+# harmlessly until you have looked at it, and the family's copies carry on pointing at
+# the last good one.
+
+name: Release
+
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Tag for this release, e.g. v1.1.0'
+        required: true
+        type: string
+      notes:
+        description: 'What changed, in plain English (optional)'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  PYTHON_VERSION: '3.12'
+
+jobs:
+
+  # ---------------------------------------------------------------- 1. sanity
+  # Thirty seconds here saves half an hour of building something that would have
+  # been rejected at the end anyway.
+  check:
+    name: Check the version
+    runs-on: ubuntu-latest
+    outputs:
+      tag: ${{ steps.v.outputs.tag }}
+      version: ${{ steps.v.outputs.version }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - id: v
+        name: Work out the tag and version
+        env:
+          RAW_TAG: ${{ inputs.tag || github.ref_name }}
+        run: |
+          tag="$RAW_TAG"
+          case "$tag" in
+            v[0-9]*) ;;
+            *) echo "::error::'$tag' is not a version tag. It has to look like v1.1.0."
+               exit 1 ;;
+          esac
+          echo "tag=$tag"            >> "$GITHUB_OUTPUT"
+          echo "version=${tag#v}"    >> "$GITHUB_OUTPUT"
+
+      - name: It must match kestrel/config.py
+        run: |
+          have=$(python3 -c "import sys;sys.path.insert(0,'.');from kestrel import config;print(config.APP_VERSION)")
+          want="${{ steps.v.outputs.version }}"
+          if [ "$have" != "$want" ]; then
+            echo "::error::The tag says $want but kestrel/config.py says $have."
+            echo "::error::Every copy compares itself against the version in the manifest."
+            echo "::error::Ship them different and the app either offers an update to the"
+            echo "::error::version it is already running, or never offers one at all."
+            echo "::error::Fix APP_VERSION in kestrel/config.py, push, and tag again."
+            exit 1
+          fi
+          echo "Version $have — matches."
+
+  # ---------------------------------------------------------------- 2. Windows
+  windows:
+    name: Windows
+    needs: check
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run every test
+        run: python -X warn_default_encoding -m pytest tests -q
+
+      - name: Build the one file that gets sent out
+        env:
+          MITTENS_ONEFILE: '1'
+        run: python -m PyInstaller build/mittens.spec --noconfirm --clean
+
+      - name: Collect it
+        shell: bash
+        run: |
+          mkdir -p out
+          cp "dist/Mittens and Pence.exe" "out/Mittens and Pence.exe"
+          cp "build/Read me first.txt"    "out/Read me first.txt"
+          ls -l out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: windows
+          path: out/
+          if-no-files-found: error
+
+  # ---------------------------------------------------------------- 3. the Macs
+  # Two of them, and it is not optional. An Apple Silicon build will not start at all
+  # on an Intel Mac, and an Intel build only runs on Apple Silicon if the person first
+  # installs Rosetta. Publishing one and calling it "the Mac version" leaves half the
+  # family with a file that does nothing when they double-click it.
+  macos:
+    name: macOS (${{ matrix.label }})
+    needs: check
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - runner: macos-latest      # Apple Silicon: M1 and everything after
+            arch: arm64
+            label: Apple Silicon
+          - runner: macos-15-intel    # the last Intel image GitHub offers
+            arch: x86_64
+            label: Intel
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+          cache-dependency-path: requirements-dev.txt
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements-dev.txt
+
+      - name: Run every test
+        run: python -X warn_default_encoding -m pytest tests -q
+
+      - name: Build the app bundle
+        run: python -m PyInstaller build/mittens.spec --noconfirm --clean
+
+      - name: It must be the processor we asked for
+        run: |
+          bin="dist/Mittens and Pence.app/Contents/MacOS/Mittens and Pence"
+          test -f "$bin" || { echo "::error::No app bundle came out of the build."; exit 1; }
+          got=$(lipo -archs "$bin")
+          echo "Built for: $got"
+          case " $got " in
+            *" ${{ matrix.arch }} "*) ;;
+            *) echo "::error::Asked for ${{ matrix.arch }} and got '$got'. A build handed"
+               echo "::error::to the wrong half of the family simply will not open."
+               exit 1 ;;
+          esac
+
+      - name: Zip it the way macOS wants
+        # ditto, not zip. A .app is a folder full of symlinks and permission bits, and
+        # a plain `zip -r` quietly flattens them — the bundle unzips looking right and
+        # refuses to launch.
+        run: |
+          mkdir -p out
+          ditto -c -k --keepParent "dist/Mittens and Pence.app" \
+                "out/Mittens and Pence-macos-${{ matrix.arch }}.app.zip"
+          cp "build/Read me first.txt" out/
+          ls -l out
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ matrix.arch }}
+          path: out/
+          if-no-files-found: error
+
+  # ---------------------------------------------------------------- 4. release
+  release:
+    name: Draft the release
+    needs: [check, windows, macos]
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write          # only this job may write, and only to make the release
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - uses: actions/download-artifact@v4
+        with:
+          path: built
+
+      - name: See what arrived, and flatten it if it needs flattening
+        # upload-artifact strips the least common ancestor of the paths it was given,
+        # so `path: out/` should arrive here as built/<artifact>/<file>. Should. Every
+        # step after this one names exact paths, and being wrong about that would mean
+        # a red cross twenty minutes into a release, so it is made true rather than
+        # assumed: if an `out/` survived the trip, lift its contents up one level.
+        run: |
+          for d in built/*/; do
+            if [ -d "$d/out" ]; then
+              echo "flattening $d"
+              mv "$d"out/* "$d" && rmdir "$d"out
+            fi
+          done
+          find built -type f -exec ls -l {} +
+
+      - name: Write the notes
+        env:
+          NOTES: ${{ inputs.notes }}
+        run: |
+          printf '%s\n' "$NOTES" > notes.md
+          if [ "$(tr -d '[:space:]' < notes.md)" = "" ]; then
+            printf 'Version %s of Mittens & Pence.\n' "${{ needs.check.outputs.version }}" > notes.md
+          fi
+          cat notes.md
+
+      - name: Build latest.json
+        run: |
+          python tools/publish.py \
+            --version "${{ needs.check.outputs.version }}" \
+            --tag     "${{ needs.check.outputs.tag }}" \
+            --notes-file notes.md \
+            "windows=built/windows/Mittens and Pence.exe" \
+            "macos-arm64=built/macos-arm64/Mittens and Pence-macos-arm64.app.zip" \
+            "macos-x86_64=built/macos-x86_64/Mittens and Pence-macos-x86_64.app.zip"
+          echo '--- latest.json ---'
+          cat latest.json
+
+      - name: Every download in the manifest must actually be attached
+        # The manifest is a promise with a SHA-256 on it. A name in there with no file
+        # behind it is a 404 for everybody who presses "Get it", and there is no way to
+        # find that out except by trying — so it is checked here instead.
+        run: |
+          python - <<'PY'
+          import json, pathlib, re, sys
+          m = json.loads(pathlib.Path("latest.json").read_text())
+          files = {p.name for p in pathlib.Path("built").rglob("*") if p.is_file()}
+          bad = [f"{k}: {d['filename']}" for k, d in m["downloads"].items()
+                 if d["filename"] not in files]
+          if bad:
+              sys.exit("latest.json names files that were not built:\n  " + "\n  ".join(bad))
+          for k, d in m["downloads"].items():
+              want = re.sub(r"\s+", ".", d["filename"])
+              if not d["url"].endswith("/" + want):
+                  sys.exit(f"{k}: url ends '{d['url'].rsplit('/',1)[-1]}', "
+                           f"but GitHub will serve it as '{want}'")
+          print(f"{len(m['downloads'])} downloads, all present and correctly addressed.")
+          PY
+
+      - name: Put it all on a draft release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.check.outputs.tag }}
+        run: |
+          set -e
+          assets=(
+            "built/windows/Mittens and Pence.exe"
+            "built/macos-arm64/Mittens and Pence-macos-arm64.app.zip"
+            "built/macos-x86_64/Mittens and Pence-macos-x86_64.app.zip"
+            "built/windows/Read me first.txt"
+            "latest.json"
+          )
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists — replacing its files."
+            gh release upload "$TAG" "${assets[@]}" --clobber
+          else
+            # --target pins the release to the exact commit these files were built
+            # from. Without it the tag is created against whatever the default branch
+            # happens to be when you press Publish, which may be several commits on.
+            gh release create "$TAG" \
+              --title "${{ needs.check.outputs.version }}" \
+              --notes-file notes.md \
+              --target "$GITHUB_SHA" \
+              --draft \
+              "${assets[@]}"
+          fi
+
+      - name: What to do next
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ needs.check.outputs.tag }}
+        run: |
+          {
+            echo "## Mittens and Pence ${{ needs.check.outputs.version }} is built"
+            echo
+            echo "It is a **draft**. Nobody can see it and no existing copy will notice it"
+            echo "until you publish it."
+            echo
+            echo "1. Go to **Releases** and open the draft."
+            echo "2. Read the description, then press **Publish release**."
+            echo
+            echo "Then check it worked:"
+            echo '```'
+            echo "https://github.com/${{ github.repository }}/releases/latest/download/latest.json"
+            echo '```'
+          } >> "$GITHUB_STEP_SUMMARY"

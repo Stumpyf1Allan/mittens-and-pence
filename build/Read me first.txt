@@ -1,0 +1,192 @@
+Mittens & Pence
+=======
+
+What it is
+----------
+A small app for keeping track of your bank accounts, budgets and investments.
+It runs entirely on your own computer.
+
+Nothing is uploaded anywhere. There is no sign-in, no account and no password.
+Your figures live in one file on your own disk and go nowhere else. The only
+things it ever reaches out to are the price feed (to value shares) and, if you
+choose to link one, your own bank.
+
+
+Running it — Windows
+--------------------
+1. Double-click Mittens & Pence.exe.
+
+2. The first time, Windows will say "Windows protected your PC".
+   Click "More info", then "Run anyway".
+
+   This is normal and expected. It appears because the app is not
+   code-signed — a certificate costs a few hundred pounds a year, which is
+   hard to justify for an app shared between a few people. Windows shows the
+   same warning for any unsigned app.
+
+3. Give it ten to twenty seconds the first time. It unpacks itself, then a
+   window opens. Later starts are quicker.
+
+If your antivirus quarantines it, that is the same cause: unsigned and
+self-unpacking. Allow it, or ask whoever sent it to you.
+
+
+Running it — Mac
+----------------
+There are two Mac files, and you need the right one. A Mac built since late
+2020 has an Apple chip; an older one has an Intel chip, and the two need
+different files. Pick the wrong one and it simply won't open.
+
+  Apple menu (top left) > About This Mac.
+    "Chip: Apple M1" (or M2, M3, M4...)  ->  the -arm64 file
+    "Processor: ... Intel ..."           ->  the -x86_64 file
+
+Then:
+
+1. Double-click the .zip. Mittens & Pence appears beside it. Drag it into
+   your Applications folder — the app works from anywhere, but Applications
+   is where you'll find it again.
+
+2. Double-click it. macOS will refuse, and say it can't be opened because
+   Apple can't check it for malicious software. That is expected. Click Done.
+
+   It is the same cause as the Windows warning above — the app isn't
+   code-signed — and macOS shows it for any unsigned app.
+
+3. Open System Settings, go to Privacy & Security, and scroll down. There is
+   a line about Mittens & Pence being blocked, with an "Open Anyway" button
+   beside it. Click that, then Open on the confirmation.
+
+   You only do this once. After that it opens like anything else.
+
+   (Older Macs let you right-click the app and choose Open instead. Newer
+   ones don't, so the route above is the one that always works.)
+
+
+First time you open it
+----------------------
+It walks you round the tabs once and asks what to call you. Then either:
+
+  * "Add my first institution" — pick your bank or broker from the list, and
+    it tells you honestly whether it can link automatically or whether you
+    need to download a statement.
+
+  * "Have a look with sample data first" — a made-up household, so you can
+    click around before entering anything real. Settings clears it later.
+
+
+The monthly job, and the folder that does it
+--------------------------------------------
+Most banks can't be linked for free, so once a month you download last month's
+statement for each of those accounts. Mittens & Pence makes you a folder for
+them — the tour shows you where it is, and Settings has a button to open it.
+
+  1. Download the statements. Any format the bank offers is fine.
+  2. Drop the files straight into the folder. Don't rename them: the bank's
+     own filename usually names the account, and that is how the app knows
+     where the transactions belong.
+  3. Open Mittens & Pence and press "Sync everything".
+
+That's it. The files are read, added, and moved into a "Filed" folder so you
+can see what has already gone in. Nothing is ever deleted.
+
+If a file can't be matched to an account with confidence, it is LEFT where it
+is and the app tells you, rather than guessing and putting a year of spending
+in the wrong place. Import that one by hand once and it will recognise the next
+one on its own.
+
+Receipts can go in the folder too. They are sorted by month and kept so you can
+find one later. They are not read — no figures are taken off a photograph.
+
+Importing the same file twice is safe: every transaction is fingerprinted, so a
+row that is already in cannot go in again.
+
+
+The monthly reminder
+--------------------
+During the tour you can give an email address, and in Settings you choose which
+day of the month to be reminded (29, 30 and 31 all mean the last day, which is
+28 in February and 29 in a leap year).
+
+Mittens & Pence runs on your own computer and has no mail server behind it, so
+it cannot post you an email out of the blue — there would be nothing running to
+send it. Instead it gives you a calendar entry: Settings > "Add it to my
+calendar" saves a small file, you open it once, and your own calendar repeats
+the reminder every month and alerts you wherever you are, phone included. If
+your calendar is set up to email you about events, you get an email.
+
+There is also a strip across the top of the app on and after the day, until
+you've actually imported something that month.
+
+
+How your spending gets sorted
+-----------------------------
+Every payment lands in a category on its own, using about 200 built-in rules
+(Tesco, Shell, Octopus, Netflix and so on). Anything it gets wrong takes one
+click to fix, and it offers to remember the correction and apply it to
+everything else that matches.
+
+The one that catches people out is Shopping against Food & Drink. The line is
+things you CONSUME against things you BUY AND KEEP — and it is decided by the
+shop, not by what was in the basket:
+
+  Food & Drink   Groceries (the supermarket shop), Restaurants & takeaway,
+                 Coffee & snacks, Alcohol
+
+  Shopping       Clothing, Electronics, Household & general, Hobbies,
+                 Books & media, Gifts given
+
+So one Tesco payment counts as Groceries in full, even if a third of it was a
+frying pan and a birthday card. Your bank sends one amount and has no idea what
+was in the trolley.
+
+When a shop like that matters, SPLIT the payment: open it in Budget >
+Transactions, click Split, and divide it across as many categories as you like.
+The parts have to add up to the penny, and the original is left exactly as your
+bank sent it — so re-uploading the statement is still safe.
+
+"Household & general" is for the shop that sells everything: Amazon, eBay,
+John Lewis, Argos, Wilko, Poundland. There is no sensible way to guess whether
+an Amazon order was a kettle or a pack of nappies, so it does not try.
+
+
+Where your data is kept
+-----------------------
+Windows:  C:\Users\<you>\AppData\Local\Mittens and Pence\
+Mac:      ~/Library/Application Support/Mittens and Pence/
+
+Settings tells you the exact folder and has a button to open it. Everything is
+in there: one database file plus your exported spreadsheets. Back that folder
+up and you have backed up everything. Delete it and the app starts empty.
+
+
+New versions
+------------
+If the person who sent you this publishes a fix, your copy notices on its own,
+usually within a day, and downloads it in the background. A strip appears at
+the top of the window when it is ready, with a button that shows you the file.
+Close the app and run the new one — on a Mac, unzip it first and drop the app
+into Applications, replacing the old one. Everything you have entered stays
+exactly where it is — your data lives in the folder above, and every version reads it.
+
+It will never replace itself while you are using it, and it never installs
+anything without you. Settings > Updates turns the whole thing off if you would
+rather look for new versions yourself.
+
+
+Reading it on your phone
+------------------------
+There is no phone app, but there is something better than nothing:
+Export a Spreadsheet > "A copy for your phone" makes a single file with your
+headline figures laid out for a small screen. Put it in iCloud, Google Drive or
+Dropbox, or email it to yourself, and open it on your phone. It works with no
+signal and sends nothing anywhere. It is a snapshot of the moment you made it,
+not a live feed, so make a fresh one when you want fresher numbers.
+
+
+Stuck?
+------
+There is a cat button in the bottom-right corner of every screen. Click it and
+it opens an email to whoever looks after the app, with the version and which
+screen you were on already filled in — and nothing at all about your money.
+Say what happened and send it.

@@ -1,0 +1,353 @@
+{
+ "truelayer": {
+  "name": "TrueLayer",
+  "regions": [
+   "GB",
+   "EU"
+  ],
+  "kind": "openbanking",
+  "self_serve": true,
+  "free": false,
+  "cost": "Free SANDBOX only. Connecting a real bank needs a paid plan.",
+  "signup": "https://console.truelayer.com/",
+  "notes": "Widest UK retail coverage, but the free console account is test mode: the app shows a 'Testing mode active' banner and tells you not to enter real bank credentials. Live access means becoming a paying client.",
+  "warning": "Free accounts are sandbox only. If you see an orange 'Testing mode active' banner, do NOT enter your real banking details \u2014 that flow connects to mock banks, not yours."
+ },
+ "plaid": {
+  "name": "Plaid",
+  "regions": [
+   "GB",
+   "EU",
+   "US",
+   "CA"
+  ],
+  "kind": "openbanking",
+  "self_serve": true,
+  "free": false,
+  "cost": "Free sandbox; limited free production trial (~10 live connections).",
+  "signup": "https://dashboard.plaid.com/signup",
+  "notes": "Production trial is usually enough for one household."
+ },
+ "enablebanking": {
+  "name": "Enable Banking",
+  "regions": [
+   "EU"
+  ],
+  "kind": "openbanking",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free 'restricted production' for accounts you own and link yourself.",
+  "signup": "https://enablebanking.com/",
+  "warning": "Enable Banking covers the EEA only. Its application form has no United Kingdom and no South Africa, so it cannot reach any bank Mittens & Pence supports. Mittens & Pence no longer offers it for that reason.",
+  "notes": "Genuinely free for a household \u2014 but EEA only. The application form lists EEA countries and does NOT include the United Kingdom, so it cannot reach UK banks. Useful if you hold an account in the EEA."
+ },
+ "yapily": {
+  "name": "Yapily",
+  "regions": [
+   "GB",
+   "EU"
+  ],
+  "kind": "openbanking",
+  "self_serve": false,
+  "free": false,
+  "cost": "Commercial; sandbox is free.",
+  "signup": "https://dashboard.yapily.com/sign-up",
+  "notes": "Strong coverage, business onboarding required for live data."
+ },
+ "tink": {
+  "name": "Tink (Visa)",
+  "regions": [
+   "GB",
+   "EU"
+  ],
+  "kind": "openbanking",
+  "self_serve": false,
+  "free": false,
+  "cost": "Commercial.",
+  "signup": "https://console.tink.com/",
+  "notes": ""
+ },
+ "saltedge": {
+  "name": "Salt Edge",
+  "regions": [
+   "GB",
+   "EU",
+   "ZA"
+  ],
+  "kind": "openbanking",
+  "self_serve": true,
+  "free": false,
+  "cost": "Free test tier; paid live.",
+  "signup": "https://www.saltedge.com/",
+  "notes": "One of the few with any South African reach."
+ },
+ "gocardless": {
+  "name": "GoCardless Bank Account Data (ex-Nordigen)",
+  "regions": [
+   "GB",
+   "EU"
+  ],
+  "kind": "openbanking",
+  "self_serve": false,
+  "free": true,
+  "cost": "Was free; new sign-ups are closed and the product is winding down.",
+  "signup": "",
+  "notes": "Kept for anyone with an existing key. Do not plan around it.",
+  "deprecated": true
+ },
+ "stitch": {
+  "name": "Stitch",
+  "regions": [
+   "ZA"
+  ],
+  "kind": "aggregator",
+  "self_serve": false,
+  "free": false,
+  "cost": "Commercial, business onboarding.",
+  "signup": "https://stitch.money/",
+  "notes": "Best South African bank-data coverage, but not sold to individuals."
+ },
+ "mono": {
+  "name": "Mono",
+  "regions": [
+   "ZA",
+   "NG",
+   "GH",
+   "KE"
+  ],
+  "kind": "aggregator",
+  "self_serve": false,
+  "free": false,
+  "cost": "Commercial, business onboarding.",
+  "signup": "https://mono.co/",
+  "notes": ""
+ },
+ "monzo": {
+  "name": "Monzo Developer API",
+  "regions": [
+   "GB"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://developers.monzo.com/",
+  "notes": "Monzo publishes an API meant for connecting to your OWN account. No aggregator, no contract, no sandbox banner. The right way to connect Monzo."
+ },
+ "starling": {
+  "name": "Starling Personal Access",
+  "regions": [
+   "GB"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://developer.starlingbank.com/",
+  "notes": "A personal access token for your own account with read-only scopes. The simplest connection in the app \u2014 one value to paste, no expiry."
+ },
+ "investec": {
+  "name": "Investec Programmable Banking",
+  "regions": [
+   "ZA"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free to Investec Private Banking clients.",
+  "signup": "https://developer.investec.com/",
+  "notes": "Genuinely self-serve: enable in Investec Online, get client ID/secret/API key."
+ },
+ "trading212": {
+  "name": "Trading 212 API",
+  "regions": [
+   "GB",
+   "EU"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "Trading 212 app \u2192 Settings \u2192 API (Beta) \u2192 Generate API key",
+  "notes": "Read permissions only \u2014 Account, Portfolio, History, Metadata. Do NOT tick 'Orders - Execute'. Newer keys come as a key AND a secret and use HTTP Basic; older single-value keys still work. ISA and Invest accounts only (no SIPP)."
+ },
+ "ibkr": {
+  "name": "Interactive Brokers Flex Web Service",
+  "regions": [
+   "GB",
+   "EU",
+   "US",
+   "ZA"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free to IBKR clients.",
+  "signup": "IBKR Client Portal \u2192 Performance & Reports \u2192 Flex Queries",
+  "notes": "Create a Flex Query, then a token. Mittens & Pence pulls the XML on a schedule."
+ },
+ "kraken": {
+  "name": "Kraken API key",
+  "regions": [
+   "GB",
+   "ZA",
+   "EU",
+   "US"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://pro.kraken.com/app/settings/api",
+  "notes": "Best read-only scoping of the lot: tick Query Funds only. Optional expiry date and IP allowlist."
+ },
+ "binance": {
+  "name": "Binance API key",
+  "regions": [
+   "GB",
+   "ZA",
+   "EU"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://www.binance.com/en/my/settings/api-management",
+  "notes": "Read-only is the default a new key gets. Needs 2FA and completed KYC before a key can be created at all."
+ },
+ "coinbase": {
+  "name": "Coinbase API key",
+  "regions": [
+   "GB",
+   "ZA",
+   "EU",
+   "US"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://portal.cdp.coinbase.com/api-keys",
+  "notes": "Keys are signed certificates (ECDSA), so this one needs the 'cryptography' package. API key access is OFF by default on every Coinbase account \u2014 switch it on first."
+ },
+ "luno": {
+  "name": "Luno API key",
+  "regions": [
+   "ZA",
+   "GB"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://www.luno.com/wallet/settings/api_keys",
+  "notes": "Offers a single 'Read-only access' preset \u2014 the safest key on the list."
+ },
+ "valr": {
+  "name": "VALR API key",
+  "regions": [
+   "ZA"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://www.valr.com/",
+  "notes": "Tick View access only. Two-factor must be enabled or VALR refuses to create a key."
+ },
+ "gemini": {
+  "name": "Gemini API key",
+  "regions": [
+   "GB",
+   "EU",
+   "US"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://exchange.gemini.com/settings/api",
+  "notes": "Pick the Auditor role \u2014 it is read-only and cannot be combined with any other role. Trader is the default, so you must change it."
+ },
+ "bitstamp": {
+  "name": "Bitstamp API key",
+  "regions": [
+   "GB",
+   "EU"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://www.bitstamp.net/account/security/api/",
+  "notes": "Per-action permission checkboxes; tick Account balance and User transactions only. The key stays inert until you activate it from an emailed confirmation link."
+ },
+ "bitpanda": {
+  "name": "Bitpanda API key",
+  "regions": [
+   "GB",
+   "EU"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://web.bitpanda.com/",
+  "notes": "Web app only \u2014 the key screen does not exist in the mobile app. The classic broker key is read-only by design; newer keys have Read/Write scopes, so pick read."
+ },
+ "ig": {
+  "name": "IG API key",
+  "regions": [
+   "GB",
+   "ZA"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free.",
+  "signup": "https://labs.ig.com/",
+  "warning": "IG's API reaches spread betting and CFD accounts ONLY. Share dealing and ISA accounts are not accessible \u2014 the API answers 'stockbroking-not-supported'. If your IG account is an ISA, this is not a route, and the statement upload is.",
+  "notes": "Self-serve and instant, but derivatives accounts only."
+ },
+ "saxo": {
+  "name": "Saxo OpenAPI",
+  "regions": [
+   "GB",
+   "EU"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free (live market data still needs the usual subscriptions).",
+  "signup": "https://www.developer.saxo/",
+  "notes": "Genuinely self-serve for a direct client: free simulation account, then a live app request that is usually auto-approved. Needs a funded live account and prior simulation testing. Whether a UK Stocks & Shares ISA appears as an account is not documented \u2014 unverified."
+ },
+ "etoro": {
+  "name": "eToro API key",
+  "regions": [
+   "GB",
+   "EU"
+  ],
+  "kind": "direct_api",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free for eligible users.",
+  "signup": "https://api-portal.etoro.com/",
+  "notes": "Settings \u2192 Trading \u2192 API Key Management. Needs a fully verified account. Whether UK-entity accounts are eligible is not documented."
+ },
+ "snaptrade": {
+  "name": "SnapTrade",
+  "regions": [
+   "GB",
+   "EU",
+   "US",
+   "CA"
+  ],
+  "kind": "aggregator",
+  "self_serve": true,
+  "free": true,
+  "cost": "Free tier for a small number of connections.",
+  "signup": "https://snaptrade.com/",
+  "notes": "Brokerage aggregator \u2014 reaches several UK brokers that have no API."
+ }
+}

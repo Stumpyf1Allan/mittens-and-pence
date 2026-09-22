@@ -1,0 +1,4606 @@
+{
+ "country": "ZA",
+ "country_name": "South Africa",
+ "currency": "ZAR",
+ "institutions": [
+  {
+   "id": "za-absa-bank",
+   "name": "Absa Bank",
+   "aka": [
+    "Absa",
+    "ABSA"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Absa Group",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "absa bank absa absa absa group",
+   "sync": {
+    "recommended": "aggregator",
+    "methods": [
+     {
+      "method": "aggregator",
+      "label": "Automatic sync (via a South African data aggregator)",
+      "providers": [
+       "stitch",
+       "mono",
+       "saltedge"
+      ],
+      "confidence": "low",
+      "auth": "South Africa has no mandated Open Banking yet. Aggregators reach these banks, but they onboard businesses rather than individuals.",
+      "refresh": "Varies by provider.",
+      "gets": [
+       "balances",
+       "transactions"
+      ],
+      "note": "Enter aggregator credentials in Settings if you have them. Otherwise use file upload, which works today and takes about a minute a month."
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Absa Online \u2192 Statements \u2192 Download \u2192 CSV / OFX / QIF (Excel also available)",
+      "profile": "absa",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-access-bank-south-africa",
+   "name": "Access Bank South Africa",
+   "aka": [
+    "Grobank"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Access Bank",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "access bank south africa grobank access bank",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online banking \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-african-bank",
+   "name": "African Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "African Bank",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "african bank african bank",
+   "sync": {
+    "recommended": "aggregator",
+    "methods": [
+     {
+      "method": "aggregator",
+      "label": "Automatic sync (via a South African data aggregator)",
+      "providers": [
+       "stitch",
+       "mono",
+       "saltedge"
+      ],
+      "confidence": "low",
+      "auth": "South Africa has no mandated Open Banking yet. Aggregators reach these banks, but they onboard businesses rather than individuals.",
+      "refresh": "Varies by provider.",
+      "gets": [
+       "balances",
+       "transactions"
+      ],
+      "note": "Enter aggregator credentials in Settings if you have them. Otherwise use file upload, which works today and takes about a minute a month."
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "African Bank online \u2192 Statements \u2192 Download",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-albaraka-bank",
+   "name": "Albaraka Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Albaraka",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "albaraka bank albaraka",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online banking \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-bank-of-baroda-sa",
+   "name": "Bank of Baroda (SA)",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Bank of Baroda",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "bank of baroda (sa) bank of baroda",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-bank-of-china-johannesburg",
+   "name": "Bank of China Johannesburg",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Bank of China",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "bank of china johannesburg bank of china",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-bank-zero",
+   "name": "Bank Zero",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Bank Zero",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "bank zero bank zero",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Bank Zero app \u2192 Statements \u2192 Export CSV",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-bidvest-bank",
+   "name": "Bidvest Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Bidvest",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "bidvest bank bidvest",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Bidvest Online \u2192 Statements \u2192 Download",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-bnp-paribas-sa",
+   "name": "BNP Paribas (SA)",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "BNP Paribas",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "bnp paribas (sa) bnp paribas",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-capitec-bank",
+   "name": "Capitec Bank",
+   "aka": [
+    "Capitec"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Capitec",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "capitec bank capitec capitec",
+   "sync": {
+    "recommended": "aggregator",
+    "methods": [
+     {
+      "method": "aggregator",
+      "label": "Automatic sync (via a South African data aggregator)",
+      "providers": [
+       "stitch",
+       "mono",
+       "saltedge"
+      ],
+      "confidence": "low",
+      "auth": "South Africa has no mandated Open Banking yet. Aggregators reach these banks, but they onboard businesses rather than individuals.",
+      "refresh": "Varies by provider.",
+      "gets": [
+       "balances",
+       "transactions"
+      ],
+      "note": "Enter aggregator credentials in Settings if you have them. Otherwise use file upload, which works today and takes about a minute a month."
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Capitec app/online \u2192 Statements \u2192 Download \u2192 CSV / PDF",
+      "profile": "capitec",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-china-construction-bank-jhb",
+   "name": "China Construction Bank JHB",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "CCB",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "china construction bank jhb ccb",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-citibank-south-africa",
+   "name": "Citibank South Africa",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Citi",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "citibank south africa citi",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "CitiDirect \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-deutsche-bank-south-africa",
+   "name": "Deutsche Bank South Africa",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Deutsche Bank",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "deutsche bank south africa deutsche bank",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-development-bank-of-southern-africa",
+   "name": "Development Bank of Southern Africa",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "DBSA",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "development bank of southern africa dbsa",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-discovery-bank",
+   "name": "Discovery Bank",
+   "aka": [
+    "Discovery"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Discovery",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "discovery bank discovery discovery",
+   "sync": {
+    "recommended": "aggregator",
+    "methods": [
+     {
+      "method": "aggregator",
+      "label": "Automatic sync (via a South African data aggregator)",
+      "providers": [
+       "stitch",
+       "mono",
+       "saltedge"
+      ],
+      "confidence": "low",
+      "auth": "South Africa has no mandated Open Banking yet. Aggregators reach these banks, but they onboard businesses rather than individuals.",
+      "refresh": "Varies by provider.",
+      "gets": [
+       "balances",
+       "transactions"
+      ],
+      "note": "Enter aggregator credentials in Settings if you have them. Otherwise use file upload, which works today and takes about a minute a month."
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Discovery Bank app \u2192 Statements \u2192 Download \u2192 CSV",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-finbond-mutual-bank",
+   "name": "Finbond Mutual Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Finbond",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "finbond mutual bank finbond",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-first-national-bank",
+   "name": "First National Bank",
+   "aka": [
+    "FNB"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "FirstRand",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "first national bank fnb firstrand",
+   "sync": {
+    "recommended": "aggregator",
+    "methods": [
+     {
+      "method": "aggregator",
+      "label": "Automatic sync (via a South African data aggregator)",
+      "providers": [
+       "stitch",
+       "mono",
+       "saltedge"
+      ],
+      "confidence": "low",
+      "auth": "South Africa has no mandated Open Banking yet. Aggregators reach these banks, but they onboard businesses rather than individuals.",
+      "refresh": "Varies by provider.",
+      "gets": [
+       "balances",
+       "transactions"
+      ],
+      "note": "Enter aggregator credentials in Settings if you have them. Otherwise use file upload, which works today and takes about a minute a month."
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "FNB Online \u2192 Statements \u2192 Download \u2192 CSV / OFX / QIF",
+      "profile": "fnb",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-gbs-mutual-bank",
+   "name": "GBS Mutual Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "GBS",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "gbs mutual bank gbs",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-grindrod-bank",
+   "name": "Grindrod Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Grindrod",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "grindrod bank grindrod",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online banking \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-habib-overseas-bank",
+   "name": "Habib Overseas Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Habib",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "habib overseas bank habib",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-hbz-bank",
+   "name": "HBZ Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "HBZ",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "hbz bank hbz",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online banking \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-hsbc-south-africa",
+   "name": "HSBC South Africa",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "HSBC",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "hsbc south africa hsbc",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online banking \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-icbc-south-africa",
+   "name": "ICBC South Africa",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "ICBC",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "icbc south africa icbc",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-investec-bank-south-africa",
+   "name": "Investec Bank (South Africa)",
+   "aka": [
+    "Investec ZA"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Investec",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "investec bank (south africa) investec za investec",
+   "sync": {
+    "recommended": "direct_api",
+    "methods": [
+     {
+      "method": "direct_api",
+      "label": "Connect automatically (Investec Programmable Banking)",
+      "providers": [
+       "investec"
+      ],
+      "confidence": "high",
+      "auth": "Generate a personal key: https://developer.investec.com/",
+      "refresh": "Runs whenever you press Sync, and on the schedule you set.",
+      "gets": [
+       "balances",
+       "transactions",
+       "holdings",
+       "dividends"
+      ]
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Investec Online \u2192 Statements \u2192 Download; or enable Programmable Banking for a live API key",
+      "profile": "investec",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-ithala",
+   "name": "Ithala",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Ithala SOC",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "ithala ithala soc",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-jpmorgan-chase-south-africa",
+   "name": "JPMorgan Chase South Africa",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "JPMorgan Chase",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "jpmorgan chase south africa jpmorgan chase",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-land-bank",
+   "name": "Land Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Land Bank",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "land bank land bank",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-mercantile-capitec-business",
+   "name": "Mercantile / Capitec Business",
+   "aka": [
+    "Mercantile Bank"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Capitec",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "mercantile / capitec business mercantile bank capitec",
+   "sync": {
+    "recommended": "aggregator",
+    "methods": [
+     {
+      "method": "aggregator",
+      "label": "Automatic sync (via a South African data aggregator)",
+      "providers": [
+       "stitch",
+       "mono",
+       "saltedge"
+      ],
+      "confidence": "low",
+      "auth": "South Africa has no mandated Open Banking yet. Aggregators reach these banks, but they onboard businesses rather than individuals.",
+      "refresh": "Varies by provider.",
+      "gets": [
+       "balances",
+       "transactions"
+      ],
+      "note": "Enter aggregator credentials in Settings if you have them. Otherwise use file upload, which works today and takes about a minute a month."
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Capitec Business online \u2192 Statements \u2192 CSV",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-nedbank",
+   "name": "Nedbank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Nedbank Group",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "nedbank nedbank group",
+   "sync": {
+    "recommended": "aggregator",
+    "methods": [
+     {
+      "method": "aggregator",
+      "label": "Automatic sync (via a South African data aggregator)",
+      "providers": [
+       "stitch",
+       "mono",
+       "saltedge"
+      ],
+      "confidence": "low",
+      "auth": "South Africa has no mandated Open Banking yet. Aggregators reach these banks, but they onboard businesses rather than individuals.",
+      "refresh": "Varies by provider.",
+      "gets": [
+       "balances",
+       "transactions"
+      ],
+      "note": "Enter aggregator credentials in Settings if you have them. Otherwise use file upload, which works today and takes about a minute a month."
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Nedbank Online \u2192 Statements \u2192 Download \u2192 CSV / OFX",
+      "profile": "nedbank",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-old-mutual-money-account",
+   "name": "Old Mutual Money Account",
+   "aka": [
+    "OM Bank"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Old Mutual",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "old mutual money account om bank old mutual",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Old Mutual app \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-sasfin-bank",
+   "name": "Sasfin Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Sasfin",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "sasfin bank sasfin",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Sasfin online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-soci-t-g-n-rale-sa",
+   "name": "Soci\u00e9t\u00e9 G\u00e9n\u00e9rale (SA)",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Soci\u00e9t\u00e9 G\u00e9n\u00e9rale",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "soci\u00e9t\u00e9 g\u00e9n\u00e9rale (sa) soci\u00e9t\u00e9 g\u00e9n\u00e9rale",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-south-african-postbank",
+   "name": "South African Postbank",
+   "aka": [
+    "Postbank"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Postbank",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "south african postbank postbank postbank",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-standard-bank",
+   "name": "Standard Bank",
+   "aka": [
+    "SBSA",
+    "Standard Bank of South Africa"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Standard Bank Group",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "standard bank sbsa standard bank of south africa standard bank group",
+   "sync": {
+    "recommended": "aggregator",
+    "methods": [
+     {
+      "method": "aggregator",
+      "label": "Automatic sync (via a South African data aggregator)",
+      "providers": [
+       "stitch",
+       "mono",
+       "saltedge"
+      ],
+      "confidence": "low",
+      "auth": "South Africa has no mandated Open Banking yet. Aggregators reach these banks, but they onboard businesses rather than individuals.",
+      "refresh": "Varies by provider.",
+      "gets": [
+       "balances",
+       "transactions"
+      ],
+      "note": "Enter aggregator credentials in Settings if you have them. Otherwise use file upload, which works today and takes about a minute a month."
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Internet Banking \u2192 Statements \u2192 Download \u2192 CSV / OFX",
+      "profile": "standard_bank",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-standard-chartered-south-africa",
+   "name": "Standard Chartered South Africa",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Standard Chartered",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "standard chartered south africa standard chartered",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online banking \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-state-bank-of-india-sa",
+   "name": "State Bank of India (SA)",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "SBI",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "state bank of india (sa) sbi",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-tymebank",
+   "name": "TymeBank",
+   "aka": [
+    "Tyme"
+   ],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "Tyme",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "tymebank tyme tyme",
+   "sync": {
+    "recommended": "aggregator",
+    "methods": [
+     {
+      "method": "aggregator",
+      "label": "Automatic sync (via a South African data aggregator)",
+      "providers": [
+       "stitch",
+       "mono",
+       "saltedge"
+      ],
+      "confidence": "low",
+      "auth": "South Africa has no mandated Open Banking yet. Aggregators reach these banks, but they onboard businesses rather than individuals.",
+      "refresh": "Varies by provider.",
+      "gets": [
+       "balances",
+       "transactions"
+      ],
+      "note": "Enter aggregator credentials in Settings if you have them. Otherwise use file upload, which works today and takes about a minute a month."
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "TymeBank app \u2192 Statements \u2192 Email/download CSV",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-ywbn-mutual-bank",
+   "name": "YWBN Mutual Bank",
+   "aka": [],
+   "country": "ZA",
+   "kind": "bank",
+   "kind_label": "Bank",
+   "group": "YWBN",
+   "currency": "ZAR",
+   "account_types": [
+    "current",
+    "savings",
+    "joint",
+    "credit"
+   ],
+   "search": "ywbn mutual bank ywbn",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-10x-investments",
+   "name": "10X Investments",
+   "aka": [
+    "10X"
+   ],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "10X",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "10x investments 10x 10x",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-absa-stockbrokers",
+   "name": "Absa Stockbrokers",
+   "aka": [
+    "Absa Online Share Trading"
+   ],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Absa Group",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "absa stockbrokers absa online share trading absa group",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Absa Online Share Trading \u2192 Portfolio \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-alexforbes",
+   "name": "Alexforbes",
+   "aka": [
+    "Alexander Forbes"
+   ],
+   "country": "ZA",
+   "kind": "pension",
+   "kind_label": "Pension",
+   "group": "Alexforbes",
+   "currency": "ZAR",
+   "account_types": [
+    "pension"
+   ],
+   "search": "alexforbes alexander forbes alexforbes",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-allan-gray",
+   "name": "Allan Gray",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Allan Gray",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "allan gray allan gray",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 My investments \u2192 Statements \u2192 Download",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-altcointrader",
+   "name": "AltCoinTrader",
+   "aka": [],
+   "country": "ZA",
+   "kind": "crypto",
+   "kind_label": "Crypto exchange",
+   "group": "AltCoinTrader",
+   "currency": "ZAR",
+   "account_types": [
+    "crypto"
+   ],
+   "search": "altcointrader altcointrader",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Account \u2192 History \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-altify",
+   "name": "Altify",
+   "aka": [
+    "Revix"
+   ],
+   "country": "ZA",
+   "kind": "crypto",
+   "kind_label": "Crypto exchange",
+   "group": "Altify",
+   "currency": "ZAR",
+   "account_types": [
+    "crypto"
+   ],
+   "search": "altify revix altify",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Account \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-anchor-capital",
+   "name": "Anchor Capital",
+   "aka": [],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Anchor",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "anchor capital anchor",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-ashburton-investments",
+   "name": "Ashburton Investments",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "FirstRand",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "ashburton investments firstrand",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-binance-za",
+   "name": "Binance (ZA)",
+   "aka": [],
+   "country": "ZA",
+   "kind": "crypto",
+   "kind_label": "Crypto exchange",
+   "group": "Binance",
+   "currency": "ZAR",
+   "account_types": [
+    "crypto"
+   ],
+   "search": "binance (za) binance",
+   "sync": {
+    "recommended": "direct_api",
+    "methods": [
+     {
+      "method": "direct_api",
+      "label": "Connect automatically (Binance API key)",
+      "providers": [
+       "binance"
+      ],
+      "confidence": "high",
+      "auth": "Generate a personal key: https://www.binance.com/en/my/settings/api-management",
+      "refresh": "Runs whenever you press Sync, and on the schedule you set.",
+      "gets": [
+       "balances",
+       "transactions",
+       "holdings",
+       "dividends"
+      ]
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Wallet \u2192 Transaction history \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-coronation",
+   "name": "Coronation",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Coronation",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "coronation coronation",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-discovery-invest",
+   "name": "Discovery Invest",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Discovery",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "discovery invest discovery",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Discovery online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-easyequities",
+   "name": "EasyEquities",
+   "aka": [
+    "Easy Equities",
+    "EasyCrypto",
+    "EasyProperties"
+   ],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Purple Group",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "easyequities easy equities easycrypto easyproperties purple group",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "EasyEquities \u2192 My Investments \u2192 Transactions / Holdings \u2192 Download CSV (per ZAR/USD/AUD wallet)",
+      "profile": "easyequities",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-edgars-tenacity",
+   "name": "Edgars / Tenacity",
+   "aka": [],
+   "country": "ZA",
+   "kind": "card",
+   "kind_label": "Credit / store card",
+   "group": "Retailability",
+   "currency": "ZAR",
+   "account_types": [
+    "credit"
+   ],
+   "search": "edgars / tenacity retailability",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-fedgroup",
+   "name": "Fedgroup",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Fedgroup",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "fedgroup fedgroup",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-fnb-share-investing",
+   "name": "FNB Share Investing",
+   "aka": [
+    "FNB Stockbroking"
+   ],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "FirstRand",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "fnb share investing fnb stockbroking firstrand",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "FNB Online \u2192 Share Investing \u2192 Portfolio \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-foord-asset-management",
+   "name": "Foord Asset Management",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Foord",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "foord asset management foord",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-glacier-by-sanlam",
+   "name": "Glacier by Sanlam",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Sanlam",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "glacier by sanlam sanlam",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Glacier Web \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-government-employees-pension-fund",
+   "name": "Government Employees Pension Fund",
+   "aka": [
+    "GEPF"
+   ],
+   "country": "ZA",
+   "kind": "pension",
+   "kind_label": "Pension",
+   "group": "GEPF",
+   "currency": "ZAR",
+   "account_types": [
+    "pension"
+   ],
+   "search": "government employees pension fund gepf gepf",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-ig-south-africa",
+   "name": "IG South Africa",
+   "aka": [],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "IG Group",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "ig south africa ig group",
+   "sync": {
+    "recommended": "direct_api",
+    "methods": [
+     {
+      "method": "direct_api",
+      "label": "Connect automatically (IG API key)",
+      "providers": [
+       "ig"
+      ],
+      "confidence": "high",
+      "auth": "Generate a personal key: https://labs.ig.com/",
+      "refresh": "Runs whenever you press Sync, and on the schedule you set.",
+      "gets": [
+       "balances",
+       "transactions",
+       "holdings",
+       "dividends"
+      ]
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "My IG \u2192 History \u2192 Download CSV",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-inn8-invest",
+   "name": "INN8 Invest",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "INN8",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "inn8 invest inn8",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Portal \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-interactive-brokers-za-client",
+   "name": "Interactive Brokers (ZA client)",
+   "aka": [],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "IBKR",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "interactive brokers (za client) ibkr",
+   "sync": {
+    "recommended": "direct_api",
+    "methods": [
+     {
+      "method": "direct_api",
+      "label": "Connect automatically (Interactive Brokers Flex Web Service)",
+      "providers": [
+       "ibkr"
+      ],
+      "confidence": "high",
+      "auth": "Generate a personal key: IBKR Client Portal \u2192 Performance & Reports \u2192 Flex Queries",
+      "refresh": "Runs whenever you press Sync, and on the schedule you set.",
+      "gets": [
+       "balances",
+       "transactions",
+       "holdings",
+       "dividends"
+      ]
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Client Portal \u2192 Flex Queries",
+      "profile": "ibkr_flex",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-investec-online-securities",
+   "name": "Investec Online (Securities)",
+   "aka": [
+    "Investec Securities"
+   ],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Investec",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "investec online (securities) investec securities investec",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Investec Online \u2192 Investments \u2192 Portfolio \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-liberty",
+   "name": "Liberty",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Liberty",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "liberty liberty",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-luno",
+   "name": "Luno",
+   "aka": [],
+   "country": "ZA",
+   "kind": "crypto",
+   "kind_label": "Crypto exchange",
+   "group": "Luno",
+   "currency": "ZAR",
+   "account_types": [
+    "crypto"
+   ],
+   "search": "luno luno",
+   "sync": {
+    "recommended": "direct_api",
+    "methods": [
+     {
+      "method": "direct_api",
+      "label": "Connect automatically (Luno API key)",
+      "providers": [
+       "luno"
+      ],
+      "confidence": "high",
+      "auth": "Generate a personal key: https://www.luno.com/wallet/settings/api_keys",
+      "refresh": "Runs whenever you press Sync, and on the schedule you set.",
+      "gets": [
+       "balances",
+       "transactions",
+       "holdings",
+       "dividends"
+      ]
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Luno \u2192 Transactions \u2192 Download CSV",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-m-g-investments-sa",
+   "name": "M&G Investments (SA)",
+   "aka": [
+    "Prudential SA"
+   ],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "M&G",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "m&g investments (sa) prudential sa m&g",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-momentum-securities",
+   "name": "Momentum Securities",
+   "aka": [],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Momentum",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "momentum securities momentum",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Portfolio \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-momentum-wealth",
+   "name": "Momentum Wealth",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Momentum",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "momentum wealth momentum",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-mr-price-money",
+   "name": "Mr Price Money",
+   "aka": [],
+   "country": "ZA",
+   "kind": "card",
+   "kind_label": "Credit / store card",
+   "group": "Mr Price",
+   "currency": "ZAR",
+   "account_types": [
+    "credit"
+   ],
+   "search": "mr price money mr price",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-nedbank-private-wealth-stockbroking",
+   "name": "Nedbank Private Wealth Stockbroking",
+   "aka": [],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Nedbank Group",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "nedbank private wealth stockbroking nedbank group",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Portfolio \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-nedgroup-investments",
+   "name": "Nedgroup Investments",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Nedbank Group",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "nedgroup investments nedbank group",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-ninety-one",
+   "name": "Ninety One",
+   "aka": [
+    "Investec Asset Management"
+   ],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Ninety One",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "ninety one investec asset management ninety one",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-old-mutual-invest",
+   "name": "Old Mutual Invest",
+   "aka": [
+    "Old Mutual Unit Trusts"
+   ],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Old Mutual",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "old mutual invest old mutual unit trusts old mutual",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-other-not-listed",
+   "name": "Other / not listed",
+   "aka": [],
+   "country": "ZA",
+   "kind": "other",
+   "kind_label": "Other",
+   "group": "Manual",
+   "currency": "ZAR",
+   "account_types": [
+    "other"
+   ],
+   "search": "other / not listed manual",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Upload any CSV \u2014 Mittens & Pence will map the columns with you",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-ovex",
+   "name": "Ovex",
+   "aka": [],
+   "country": "ZA",
+   "kind": "crypto",
+   "kind_label": "Crypto exchange",
+   "group": "Ovex",
+   "currency": "ZAR",
+   "account_types": [
+    "crypto"
+   ],
+   "search": "ovex ovex",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-prescient-investment-management",
+   "name": "Prescient Investment Management",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Prescient",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "prescient investment management prescient",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-property-manual-valuation",
+   "name": "Property (manual valuation)",
+   "aka": [],
+   "country": "ZA",
+   "kind": "asset",
+   "kind_label": "Other asset",
+   "group": "Manual",
+   "currency": "ZAR",
+   "account_types": [
+    "asset"
+   ],
+   "search": "property (manual valuation) manual",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-psg-wealth-psg-online",
+   "name": "PSG Wealth / PSG Online",
+   "aka": [
+    "PSG"
+   ],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "PSG",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "psg wealth / psg online psg psg",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "PSG Online \u2192 Portfolio / Statements \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-rand-swiss",
+   "name": "Rand Swiss",
+   "aka": [],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Rand Swiss",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "rand swiss rand swiss",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-rcs-store-card",
+   "name": "RCS Store Card",
+   "aka": [],
+   "country": "ZA",
+   "kind": "card",
+   "kind_label": "Credit / store card",
+   "group": "RCS",
+   "currency": "ZAR",
+   "account_types": [
+    "credit"
+   ],
+   "search": "rcs store card rcs",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "RCS online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-sanlam-itrade",
+   "name": "Sanlam iTrade",
+   "aka": [],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Sanlam",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "sanlam itrade sanlam",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "iTrade \u2192 Portfolio \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-satrix",
+   "name": "Satrix",
+   "aka": [
+    "SatrixNOW"
+   ],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Sanlam",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "satrix satrixnow sanlam",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "SatrixNOW \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-standard-bank-online-share-trading",
+   "name": "Standard Bank Online Share Trading",
+   "aka": [
+    "OST",
+    "SBG Securities"
+   ],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Standard Bank Group",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "standard bank online share trading ost sbg securities standard bank group",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "OST \u2192 Portfolio / Statements \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-stanlib",
+   "name": "Stanlib",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Standard Bank Group",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "stanlib standard bank group",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-sygnia",
+   "name": "Sygnia",
+   "aka": [],
+   "country": "ZA",
+   "kind": "platform",
+   "kind_label": "Investment platform",
+   "group": "Sygnia",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "unit_trust",
+    "ra",
+    "tfsa"
+   ],
+   "search": "sygnia sygnia",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Sygnia Alchemy \u2192 Statements \u2192 Download",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-tfg-money-foschini",
+   "name": "TFG Money (Foschini)",
+   "aka": [
+    "Foschini"
+   ],
+   "country": "ZA",
+   "kind": "card",
+   "kind_label": "Credit / store card",
+   "group": "TFG",
+   "currency": "ZAR",
+   "account_types": [
+    "credit"
+   ],
+   "search": "tfg money (foschini) foschini tfg",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "TFG online account \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-trive-south-africa",
+   "name": "Trive South Africa",
+   "aka": [
+    "GT247"
+   ],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Trive",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "trive south africa gt247 trive",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "Platform \u2192 Reports \u2192 Export",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-truworths",
+   "name": "Truworths",
+   "aka": [],
+   "country": "ZA",
+   "kind": "card",
+   "kind_label": "Credit / store card",
+   "group": "Truworths",
+   "currency": "ZAR",
+   "account_types": [
+    "credit"
+   ],
+   "search": "truworths truworths",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-unum-capital",
+   "name": "Unum Capital",
+   "aka": [],
+   "country": "ZA",
+   "kind": "broker",
+   "kind_label": "Investment platform / broker",
+   "group": "Unum",
+   "currency": "ZAR",
+   "account_types": [
+    "isa",
+    "gia",
+    "sipp",
+    "tfsa",
+    "trading"
+   ],
+   "search": "unum capital unum",
+   "sync": {
+    "recommended": "manual",
+    "methods": [
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-valr",
+   "name": "VALR",
+   "aka": [],
+   "country": "ZA",
+   "kind": "crypto",
+   "kind_label": "Crypto exchange",
+   "group": "VALR",
+   "currency": "ZAR",
+   "account_types": [
+    "crypto"
+   ],
+   "search": "valr valr",
+   "sync": {
+    "recommended": "direct_api",
+    "methods": [
+     {
+      "method": "direct_api",
+      "label": "Connect automatically (VALR API key)",
+      "providers": [
+       "valr"
+      ],
+      "confidence": "high",
+      "auth": "Generate a personal key: https://www.valr.com/",
+      "refresh": "Runs whenever you press Sync, and on the schedule you set.",
+      "gets": [
+       "balances",
+       "transactions",
+       "holdings",
+       "dividends"
+      ]
+     },
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "VALR \u2192 Transaction history \u2192 Export CSV",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "za-woolworths-financial-services",
+   "name": "Woolworths Financial Services",
+   "aka": [
+    "Woolworths Card"
+   ],
+   "country": "ZA",
+   "kind": "card",
+   "kind_label": "Credit / store card",
+   "group": "Woolworths",
+   "currency": "ZAR",
+   "account_types": [
+    "credit"
+   ],
+   "search": "woolworths financial services woolworths card woolworths",
+   "sync": {
+    "recommended": "csv",
+    "methods": [
+     {
+      "method": "csv",
+      "label": "Download a statement and upload it",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Do it once a month \u2014 Mittens & Pence remembers the column layout and de-duplicates rows so re-uploading an overlapping file is safe.",
+      "gets": [
+       "transactions",
+       "holdings",
+       "dividends"
+      ],
+      "where": "W Rewards / WFS online \u2192 Statements",
+      "profile": "generic",
+      "formats": [
+       "csv",
+       "xlsx",
+       "ofx",
+       "qif",
+       "tsv",
+       "pdf"
+      ]
+     },
+     {
+      "method": "manual",
+      "label": "Type the balance in yourself",
+      "providers": [],
+      "confidence": "high",
+      "auth": "No credentials needed.",
+      "refresh": "Update it whenever you like; Mittens & Pence keeps the monthly history.",
+      "gets": [
+       "balances"
+      ]
+     }
+    ]
+   }
+  }
+ ]
+}

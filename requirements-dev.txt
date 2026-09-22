@@ -1,0 +1,16 @@
+-r requirements.txt
+pytest>=8.0
+pyinstaller>=6.5
+
+# Only used to *generate* sample PDFs for the test suite — the app reads PDFs with
+# pdfplumber and never needs this. It is here because without it the six PDF-statement
+# tests skip silently, so the build script's "checking everything still works" step
+# would quietly not check the one feature that has already caused a packaging bug.
+reportlab>=4.0
+
+# Used by one test, which reads .github/workflows/release.yml and checks it against
+# the rest of the repository. A workflow file with a typo in it is accepted by git,
+# pushed happily, and then does nothing at all — GitHub reports the error on a page
+# nobody thinks to open. Parsing it here means a broken release pipeline fails on
+# this machine, before the tag goes up.
+PyYAML>=6.0

@@ -1,0 +1,6 @@
+Mittens & Pence — personal finance app built for Allan Clark's family.
+
+You may use, copy, modify and share this software freely. It comes with no
+warranty of any kind: the figures are only as good as the statements fed into
+it, and nothing in it is financial advice. Check anything that matters against
+your actual accounts.
