@@ -1,0 +1,37 @@
+# Line endings, decided here rather than per-machine.
+#
+# Git normalises text to LF when it stores a file, and converts it back on checkout
+# using whatever core.autocrlf happens to be set to on the machine doing the checkout.
+# That is fine until the machine is somebody else's. Committing from Windows stored
+# build_windows.bat as LF; the Mac build runners checked it back out as LF; and a .bat
+# with Unix line endings is unreliable in cmd.exe around the multi-line
+# `if errorlevel ( ... )` blocks that script depends on to stop after a failed test.
+#
+# It would also have gone out that way inside the "Source code (zip)" that GitHub
+# attaches to every release — so this was not only a test failing, it was the shipped
+# build script being subtly wrong for anybody who used it.
+#
+# The eol= settings below override core.autocrlf on every platform, so each file is
+# checked out with the endings it actually needs no matter who is checking it out.
+
+* text=auto eol=lf
+
+# Windows reads these. They need CRLF wherever they land.
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
+*.ps1  text eol=crlf
+
+# And these are read by a Unix shell, where a CRLF breaks the shebang line and the
+# error is "bad interpreter", which names nothing useful.
+*.sh       text eol=lf
+*.command  text eol=lf
+
+# Never rewritten. text=auto normally works this out on its own; saying so explicitly
+# means it cannot get it wrong on a file added later.
+*.png   binary
+*.ico   binary
+*.icns  binary
+*.xlsx  binary
+*.pdf   binary
+*.zip   binary
+*.db    binary

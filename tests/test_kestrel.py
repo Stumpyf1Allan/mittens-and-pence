@@ -2474,6 +2474,30 @@ class TestBuildSpec:
         assert raw.count(b"\r\n") > 20
         assert raw.count(b"\n") == raw.count(b"\r\n"), "some lines are missing a CR"
 
+    def test_git_is_told_to_keep_the_windows_line_endings(self):
+        """The test above only means anything if the repository's copy survives.
+
+        Git normalises text to LF when it stores a file and converts back using whatever
+        core.autocrlf is set to on the machine checking it out. Committing from Windows
+        therefore stored build_windows.bat as LF, and the two Mac build machines got it
+        back as LF — which is exactly how the test above passed on the PC that wrote the
+        file and failed on both runners. The same LF copy would have gone out inside the
+        "Source code (zip)" GitHub attaches to every release.
+
+        .gitattributes decides it once, for every platform, overriding whatever each
+        machine happens to be configured to do.
+        """
+        import re
+        ga = self._root() / ".gitattributes"
+        assert ga.exists(), "nothing stops git rewriting the line endings on checkout"
+        text = ga.read_text(encoding="utf-8")
+        assert re.search(r"^\*\.bat\s+text\s+eol=crlf", text, re.M), \
+            "build_windows.bat comes back LF on any machine that is not Windows"
+        for suffix in ("sh", "command"):
+            assert re.search(rf"^\*\.{suffix}\s+text\s+eol=lf", text, re.M), \
+                "a shell script with CRLF fails on its shebang line, saying only " \
+                "'bad interpreter'"
+
     def test_the_read_me_warns_about_the_unsigned_app_warning(self):
         # It is the first thing every recipient will hit, and it looks alarming.
         text = (self._root() / "build" / "Read me first.txt").read_text(encoding="utf-8")
